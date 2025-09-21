@@ -16,7 +16,7 @@ public class DbConnectionFactory : IDbConnectionFactory
     
     public async Task<IDbConnection> CreateConnectionAsync()
     {
-        var connection = new NpgsqlConnection(_configuration.GetConnectionString("DefaultConnection"));
+        var connection = new NpgsqlConnection(_configuration.GetConnectionString("StaffDbConnection"));
         
         await connection.OpenAsync();
         return connection;

@@ -8,7 +8,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddPersistence(this IServiceCollection services)
     {
-        services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>();
+        services.AddTransient<IDbConnectionFactory, DbConnectionFactory>();
         return services;
     }
 }
