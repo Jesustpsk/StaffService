@@ -11,9 +11,7 @@ public class PassportRepository : BaseRepository<Passport>, IPassportRepository
     
     public async Task<int> AddAsync(Passport passport)
     {
-        var query = SqlCommandsConstants.AddPassport;
-
-        var passportId = await Connection.QuerySingleAsync<int>(query, passport);
+        var passportId = await Connection.QuerySingleAsync<int>(SqlCommandsConstants.AddPassport, passport);
         return passportId;
     }
 }

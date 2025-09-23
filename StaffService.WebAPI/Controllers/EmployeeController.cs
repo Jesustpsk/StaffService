@@ -17,12 +17,10 @@ namespace StaffService.WebAPI.Controllers;
 public class EmployeeController : ControllerBase
 {
     private readonly IMediator _mediator;
-    private readonly IMapper _mapper;
     
-    public EmployeeController(IMediator mediator, IMapper mapper)
+    public EmployeeController(IMediator mediator)
     {
         _mediator = mediator;
-        _mapper = mapper;
     }
 
     [HttpGet("{id:int}")]
@@ -61,7 +59,7 @@ public class EmployeeController : ControllerBase
     {
         await _mediator.Send(command);
         
-        return NoContent();
+        return Ok();
     }
 
     [HttpDelete("{id:int}")]
@@ -74,6 +72,6 @@ public class EmployeeController : ControllerBase
         
         await _mediator.Send(command);
 
-        return NoContent();
+        return Ok();
     }
 }

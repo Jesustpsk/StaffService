@@ -17,7 +17,7 @@ public class GetEmployeesQueryHandler : IRequestHandler<GetEmployeesQuery, List<
 
     public async Task<List<EmployeeVm>> Handle(GetEmployeesQuery request, CancellationToken cancellationToken)
     {
-        var employees = await _employeeRepository.GetListAsync(request);
+        var employees = await _employeeRepository.GetListAsync();
         
         var employeesVm = _mapper.Map<List<EmployeeVm>>(employees);
         

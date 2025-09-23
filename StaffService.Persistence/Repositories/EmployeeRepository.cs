@@ -1,11 +1,8 @@
 using StaffService.Application.Interfaces;
 using Dapper;
 using StaffService.Domain.Models;
-using MediatR;
-using StaffService.Application.Common.Exceptions;
-using StaffService.Application.CQRS.Employees.Queries.GetEmployeeList;
+using StaffService.Application.CQRS.Employees.Commands.UpdateEmployee;
 using StaffService.Persistence.Constants;
-using StaffService.Persistence.Helpers;
 
 namespace StaffService.Persistence.Repositories;
 
@@ -15,34 +12,24 @@ public class EmployeeRepository : BaseRepository<Employee>, IEmployeeRepository
 
     public async Task<int> AddAsync(Employee employee)
     {
-        var query = SqlCommandsConstants.AddEmployee;
-
-        var employeeId = await Connection.QuerySingleAsync<int>(query, employee);
+        var employeeId = await Connection.QuerySingleAsync<int>(SqlCommandsConstants.AddEmployee, employee);
         return employeeId;
     }
 
-    public async Task<Unit> DeleteAsync(int id)
+    public async Task<int> DeleteAsync(int id)
     {
-        var query = SqlCommandsConstants.DeleteEmployee;
-
-        await Connection.ExecuteAsync(query, id);
-        return Unit.Value;
+        return await Connection.ExecuteAsync(SqlCommandsConstants.DeleteEmployee, new { id });
     }
 
-    public async Task<Unit> UpdateAsync(int id)
+    public async Task<int> UpdateAsync(UpdateEmployeeCommand updateEmployeeCommand)
     {
-        var query = SqlCommandsConstants.UpdateEmployee;
-
-        await Connection.ExecuteAsync(query, id);
-        return Unit.Value;
+        return await Connection.ExecuteAsync(SqlCommandsConstants.UpdateEmployee, updateEmployeeCommand);
     }
 
-    public async Task<IEnumerable<Employee>> GetListAsync(GetEmployeesQuery queryParams)
+    public async Task<IEnumerable<Employee>> GetListAsync()
     {
-        var query = SqlCommandsConstants.GetAllEmployeesWithDependencies;
-        
         var employees = await Connection.QueryAsync<Employee, Passport, Department, Employee>(
-            query,
+            SqlCommandsConstants.GetAllEmployeesWithDependencies,
             (employees, passports, departments) =>
             {
                 employees.Passport = passports;
@@ -57,10 +44,8 @@ public class EmployeeRepository : BaseRepository<Employee>, IEmployeeRepository
 
     public async Task<Employee?> GetAsync(int id)
     {
-        var query = SqlCommandsConstants.GetEmployeeWithDependenciesById;
-        
         var employees = await Connection.QueryAsync<Employee, Passport, Department, Employee>(
-            query,
+            SqlCommandsConstants.GetEmployeeWithDependenciesById,
             (employees, passports, departments) =>
             {
                 employees.Passport = passports;

@@ -11,9 +11,7 @@ public class DepartmentRepository : BaseRepository<Department>, IDepartmentRepos
     
     public async Task<int> AddAsync(Department department)
     {
-        var query = SqlCommandsConstants.AddDepartment;
-
-        var departmentId = await Connection.QuerySingleAsync<int>(query, department);
+        var departmentId = await Connection.QuerySingleAsync<int>(SqlCommandsConstants.AddDepartment, department);
         return departmentId;
     }
 }
