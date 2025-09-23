@@ -1,0 +1,33 @@
+version: "3.9"
+services:
+  api:
+    build: .
+    container_name: StaffApi
+    ports:
+      - "5000:8080"   # localhost:5000 -> контейнер:8080
+    environment:
+      ConnectionStrings__StaffServiceDbContext: "Host=db;Port=5432;Database=StaffServiceDb;Username=postgres;Password=1234"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16
+    container_name: StaffDb
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: StaffServiceDb
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d StaffServiceDb" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  db_data:
