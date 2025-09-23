@@ -1,12 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{806A6AD2-FC3B-447F-8074-06D5E5EB02F1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaffService.Domain", "StaffService.Domain\StaffService.Domain.csproj", "{806A6AD2-FC3B-447F-8074-06D5E5EB02F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{E1A671B3-7992-4970-AB15-9BBDDC6F699E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaffService.Application", "StaffService.Application\StaffService.Application.csproj", "{E1A671B3-7992-4970-AB15-9BBDDC6F699E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\Persistence.csproj", "{CBAF5B32-4D33-4C2D-80C5-B3D67E719C51}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaffService.Persistence", "StaffService.Persistence\StaffService.Persistence.csproj", "{CBAF5B32-4D33-4C2D-80C5-B3D67E719C51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{532C2CE3-D11E-4124-B5E6-D855C0594C1E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaffService.WebAPI", "StaffService.WebAPI\StaffService.WebAPI.csproj", "{532C2CE3-D11E-4124-B5E6-D855C0594C1E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{0DC5BC30-65CB-441C-B023-85A7AE0520E5}"
 	ProjectSection(SolutionItems) = preProject
