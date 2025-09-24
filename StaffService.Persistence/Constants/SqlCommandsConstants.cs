@@ -96,7 +96,7 @@ public static class SqlCommandsConstants
                                            SET 
                                                name = COALESCE(@Name, name),
                                                phone = COALESCE(@Phone, phone)
-                                           WHERE id = (SELECT department_id FROM employees WHERE id = @id);
+                                           WHERE id = (SELECT department_id FROM employees WHERE id = @id)
                                            RETURNING id;";
     #endregion
     
@@ -109,7 +109,7 @@ public static class SqlCommandsConstants
                                            SET 
                                                type = COALESCE(@Type, type),
                                                number = COALESCE(@Number, number)
-                                           WHERE id = (SELECT passport_id FROM employees WHERE id = @id);
+                                           WHERE id = (SELECT passport_id FROM employees WHERE id = @id)
                                            RETURNING id;";
     #endregion
 }

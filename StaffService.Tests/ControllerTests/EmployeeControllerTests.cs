@@ -10,7 +10,6 @@ using StaffService.Application.CQRS.Employees.Commands.UpdateEmployeeWithDepende
 using StaffService.Application.CQRS.Employees.Queries;
 using StaffService.Application.CQRS.Employees.Queries.GetEmployee;
 using StaffService.Application.CQRS.Employees.Queries.GetEmployeeList;
-using StaffService.Domain.Models;
 using StaffService.Tests.Bogus;
 using StaffService.WebAPI.Controllers;
 using Xunit;
