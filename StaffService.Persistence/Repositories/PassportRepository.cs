@@ -1,5 +1,4 @@
 using StaffService.Application.Interfaces;
-using Dapper;
 using StaffService.Domain.Models;
 using StaffService.Persistence.Constants;
 
@@ -10,8 +9,8 @@ public class PassportRepository : BaseRepository<Passport>, IPassportRepository
     public PassportRepository(IStaffServiceDbContext context) : base(context) { }
     
     public async Task<int> AddAsync(Passport passport)
-    {
-        var passportId = await Connection.QuerySingleAsync<int>(SqlCommandsConstants.AddPassport, passport);
-        return passportId;
-    }
+        => await QuerySingleAsync<int>(SqlCommandsConstants.AddPassport, passport);
+
+    public async Task<int> UpdateAsync(Passport passport)
+        => await ExecuteAsync(SqlCommandsConstants.UpdatePassport, passport);
 }

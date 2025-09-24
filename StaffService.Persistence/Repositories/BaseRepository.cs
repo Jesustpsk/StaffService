@@ -1,4 +1,3 @@
-using System.Data;
 using StaffService.Application.Interfaces;
 using Dapper;
 
@@ -6,16 +5,22 @@ namespace StaffService.Persistence.Repositories;
 
 public abstract class BaseRepository<TEntity>
 {
-    protected readonly IDbConnection Connection;
+    protected readonly IStaffServiceDbContext Context;
 
     protected BaseRepository(IStaffServiceDbContext context)
     {
-        Connection = context.CreateConnection();
+        Context = context;
     }
 
-    public virtual async Task<int> AddAsync(TEntity entity, string sql)
-        => await Connection.QuerySingleAsync<int>(sql, entity);
+    protected async Task<T> QuerySingleAsync<T>(string sql, object param = null)
+    {
+        using var connection = await Context.CreateConnectionAsync();
+        return await connection.QuerySingleAsync<T>(sql, param);
+    }
 
-    public virtual async Task<int> DeleteAsync(int id, string sql)
-        => await Connection.ExecuteAsync(sql, new { id });
+    protected async Task<int> ExecuteAsync(string sql, object param = null)
+    {
+        using var connection = await Context.CreateConnectionAsync();
+        return await connection.ExecuteAsync(sql, param);
+    }
 }

@@ -1,5 +1,4 @@
 using StaffService.Application.Interfaces;
-using Dapper;
 using StaffService.Domain.Models;
 using StaffService.Persistence.Constants;
 
@@ -10,8 +9,8 @@ public class DepartmentRepository : BaseRepository<Department>, IDepartmentRepos
     public DepartmentRepository(IStaffServiceDbContext context) : base(context) { }
     
     public async Task<int> AddAsync(Department department)
-    {
-        var departmentId = await Connection.QuerySingleAsync<int>(SqlCommandsConstants.AddDepartment, department);
-        return departmentId;
-    }
+        => await QuerySingleAsync<int>(SqlCommandsConstants.AddDepartment, department);
+
+    public async Task<int> UpdateAsync(Department department)
+        => await ExecuteAsync(SqlCommandsConstants.UpdateDepartment, department);
 }

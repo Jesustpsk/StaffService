@@ -9,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
 
+Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+
 services.AddControllers();
 services.AddWebApi(configuration);
 services.AddApplication();
@@ -29,7 +31,7 @@ services.AddSwaggerGen(config =>
     config.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = $"WebPanel API",
+        Title = $"Staff API",
     });
     
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

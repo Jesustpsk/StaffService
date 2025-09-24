@@ -1,9 +1,8 @@
 using StaffService.Application.CQRS.Employees.Commands.AddEmployeeWithDependencies;
+using StaffService.Application.CQRS.Employees.Commands.UpdateEmployeeWithDependencies;
 using StaffService.Application.CQRS.Employees.Commands.DeleteEmployee;
-using StaffService.Application.CQRS.Employees.Commands.UpdateEmployee;
 using StaffService.Application.CQRS.Employees.Queries.GetEmployee;
 using StaffService.Application.CQRS.Employees.Queries.GetEmployeeList;
-using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,10 +36,8 @@ public class EmployeeController : ControllerBase
     }
     
     [HttpGet("list")]
-    public async Task<IActionResult> GetEmployeesAsync()
+    public async Task<IActionResult> GetEmployeesAsync(GetEmployeesQuery query)
     {
-        var query = new GetEmployeesQuery();
-        
         var employeesVm = await _mediator.Send(query);
         
         return Ok(employeesVm);
@@ -55,7 +52,7 @@ public class EmployeeController : ControllerBase
     }
 
     [HttpPatch]
-    public async Task<IActionResult> UpdateEmployeeAsync([FromBody] UpdateEmployeeCommand command)
+    public async Task<IActionResult> UpdateEmployeeAsync([FromBody] UpdateEmployeeWithDependenciesCommand command)
     {
         await _mediator.Send(command);
         

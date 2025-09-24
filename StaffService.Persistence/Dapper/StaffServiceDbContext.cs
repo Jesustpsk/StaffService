@@ -14,15 +14,11 @@ public class StaffServiceDbContext : IStaffServiceDbContext, IDisposable
         _connectionString = connectionString;
     }
 
-    public IDbConnection CreateConnection()
+    public async Task<IDbConnection> CreateConnectionAsync()
     {
-        if (_connection is not { State: ConnectionState.Open })
-        {
-            _connection = new NpgsqlConnection(_connectionString);
-            _connection.Open();
-        }
-        
-        return _connection;
+        var connection = new NpgsqlConnection(_connectionString);
+        await connection.OpenAsync();
+        return connection;
     }
 
     public void Dispose()

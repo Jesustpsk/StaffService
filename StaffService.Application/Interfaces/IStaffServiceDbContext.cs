@@ -4,5 +4,5 @@ namespace StaffService.Application.Interfaces;
 
 public interface IStaffServiceDbContext
 {
-    public IDbConnection CreateConnection();
+    public Task<IDbConnection> CreateConnectionAsync();
 }

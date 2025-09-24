@@ -1,6 +1,7 @@
 using AutoMapper;
 using MediatR;
 using StaffService.Application.Interfaces;
+using StaffService.Domain.Models;
 
 namespace StaffService.Application.CQRS.Employees.Commands.UpdateEmployeeWithDependencies;
 
@@ -21,7 +22,14 @@ public class UpdateEmployeeWithDependenciesCommandHandler : IRequestHandler<Upda
 
     public async Task<Unit> Handle(UpdateEmployeeWithDependenciesCommand request, CancellationToken cancellationToken)
     {
-        //TODO: тут нужно привязаться к 3 репозиториям и последовательно вызвать апдейты
-        throw new Exception();
+        var department = _mapper.Map<Department>(request);
+        var passport = _mapper.Map<Passport>(request);
+        var employee = _mapper.Map<Employee>(request);
+                
+        await _employeeRepository.UpdateAsync(employee);
+        await _passportRepository.UpdateAsync(passport);
+        await _departmentRepository.UpdateAsync(department);
+        
+        return Unit.Value;
     }
 }

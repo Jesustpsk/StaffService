@@ -16,7 +16,7 @@ public static class SqlCommandsConstants
                                                 name = COALESCE(@name, name),
                                                 surname = COALESCE(@surname, surname),
                                                 phone = COALESCE(@phone, phone),
-                                                company_id = COALESCE(@company_id, company_id)
+                                                company_id = COALESCE(@CompanyId, company_id)
                                             WHERE id = @id;";
 
     public const string GetEmployeeById = @"SELECT * FROM employees WHERE id = @id;";
@@ -43,7 +43,7 @@ public static class SqlCommandsConstants
                                                                     ,e.name
                                                                     ,e.surname
                                                                     ,e.phone
-                                                                    ,e.company_id
+                                                                    ,e.company_id AS CompanyId
                                                                     ,p.id as p_id
                                                                     ,p.type
                                                                     ,p.number
@@ -53,6 +53,38 @@ public static class SqlCommandsConstants
                                                                 FROM employees e
                                                                 JOIN departments d ON d.id = e.department_id
                                                                 JOIN passports p ON p.id = e.passport_id";
+    
+    public const string GetAllEmployeesWithDependenciesByCompany = $@"SELECT   e.id  
+                                                                    ,e.name
+                                                                    ,e.surname
+                                                                    ,e.phone
+                                                                    ,e.company_id
+                                                                    ,p.id as p_id
+                                                                    ,p.type
+                                                                    ,p.number
+                                                                    ,d.id as d_id
+                                                                    ,d.name
+                                                                    ,d.phone
+                                                                FROM employees e
+                                                                JOIN departments d ON d.id = e.department_id
+                                                                JOIN passports p ON p.id = e.passport_id
+                                                                WHERE e.company_id = @company_id";
+    
+    public const string GetAllEmployeesWithDependenciesByDepartment = $@"SELECT   e.id  
+                                                                    ,e.name
+                                                                    ,e.surname
+                                                                    ,e.phone
+                                                                    ,e.company_id
+                                                                    ,p.id as p_id
+                                                                    ,p.type
+                                                                    ,p.number
+                                                                    ,d.id as d_id
+                                                                    ,d.name
+                                                                    ,d.phone
+                                                                FROM employees e
+                                                                JOIN departments d ON d.id = e.department_id
+                                                                JOIN passports p ON p.id = e.passport_id
+                                                                WHERE d.name = @department_name";
     #endregion
     
     #region Department
@@ -60,22 +92,22 @@ public static class SqlCommandsConstants
                                           VALUES (@Name, @Phone)
                                               RETURNING id;";
     
-    public const string UpdateDepartment = @"INSERT INTO departments (name, phone)
-                                          VALUES (@Name, @Phone)
-                                              RETURNING id;";
+    public const string UpdateDepartment = @"UPDATE departments 
+                                           SET 
+                                               name = COALESCE(@Name, name),
+                                               phone = COALESCE(@Phone, phone)
+                                           WHERE id = (SELECT department_id FROM employees WHERE id = @id);";
     #endregion
     
     #region Passport
-    public const string AddPassport = @"UPDATE departments 
-                                        SET 
-                                            name = COALESCE(@department_name, name),
-                                            phone = COALESCE(@department_phone, phone)
-                                        WHERE id = (SELECT department_id FROM employees WHERE id = @id);";
+    public const string AddPassport = @"INSERT INTO passports (type, number)
+                                          VALUES (@Type, @Number)
+                                              RETURNING id;";
     
     public const string UpdatePassport = @"UPDATE passports 
                                            SET 
-                                               type = COALESCE(@passport_type, type),
-                                               number = COALESCE(@passport_number, number)
+                                               type = COALESCE(@Type, type),
+                                               number = COALESCE(@Number, number)
                                            WHERE id = (SELECT passport_id FROM employees WHERE id = @id);";
     #endregion
 }
