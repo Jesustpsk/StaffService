@@ -47,7 +47,6 @@ public class CustomExceptionHandlerMiddleware
                 _logger.LogError(validationEx, "Validation error occurred");
                 break;
 
-            case FileNotFoundException:
             case NotFoundException:
                 context.Response.StatusCode = StatusCodes.Status404NotFound;
                 problemDetails.Title = "Resource not found";
@@ -59,6 +58,13 @@ public class CustomExceptionHandlerMiddleware
                 problemDetails.Title = "Argument out of range";
                 problemDetails.Extensions["errors"] = exception.Message;
                 _logger.LogError(exception, "Argument out of range");
+                break;
+            
+            case Npgsql.PostgresException:
+                context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                problemDetails.Title = "PostgreSQL exception";
+                problemDetails.Extensions["errors"] = exception.Message;
+                _logger.LogError(exception, "PostgreSQL exception");
                 break;
             
             default:

@@ -15,11 +15,8 @@ public class EmployeeRepository : BaseRepository<Employee>, IEmployeeRepository
         => await QuerySingleAsync<int>(SqlCommandsConstants.AddEmployee, employee);
 
     public async Task<int> DeleteAsync(int id)
-    {
-        using var connection = await Context.CreateConnectionAsync();
-        return await connection.ExecuteAsync(SqlCommandsConstants.DeleteEmployee, new { id });
-    }
-
+        => await ExecuteAsync(SqlCommandsConstants.DeleteEmployee, new { id });
+    
     public async Task<int> UpdateAsync(Employee employee)
         => await ExecuteAsync(SqlCommandsConstants.UpdateEmployee, employee);
 

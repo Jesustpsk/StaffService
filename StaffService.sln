@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{0DC5BC
 		Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaffService.Tests", "StaffService.Tests\StaffService.Tests.csproj", "{3B33E003-643A-4351-B818-45F43FB7F785}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{532C2CE3-D11E-4124-B5E6-D855C0594C1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{532C2CE3-D11E-4124-B5E6-D855C0594C1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{532C2CE3-D11E-4124-B5E6-D855C0594C1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B33E003-643A-4351-B818-45F43FB7F785}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B33E003-643A-4351-B818-45F43FB7F785}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B33E003-643A-4351-B818-45F43FB7F785}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B33E003-643A-4351-B818-45F43FB7F785}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Bogus" Version="35.6.3" />
+      <PackageReference Include="FluentAssertions" Version="8.6.0" />
+      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+      <PackageReference Include="Moq" Version="4.20.72" />
+      <PackageReference Include="Moq.Dapper" Version="1.0.7" />
+      <PackageReference Include="xunit" Version="2.9.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\StaffService.Application\StaffService.Application.csproj" />
+      <ProjectReference Include="..\StaffService.Persistence\StaffService.Persistence.csproj" />
+      <ProjectReference Include="..\StaffService.WebAPI\StaffService.WebAPI.csproj" />
+    </ItemGroup>
+
+</Project>
