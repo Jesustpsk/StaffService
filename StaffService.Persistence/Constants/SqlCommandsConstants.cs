@@ -13,9 +13,9 @@ public static class SqlCommandsConstants
 
     public const string UpdateEmployee = @"UPDATE employees 
                                             SET 
-                                                name = COALESCE(@name, name),
-                                                surname = COALESCE(@surname, surname),
-                                                phone = COALESCE(@phone, phone),
+                                                name = COALESCE(@Name, name),
+                                                surname = COALESCE(@Surname, surname),
+                                                phone = COALESCE(@Phone, phone),
                                                 company_id = COALESCE(@CompanyId, company_id)
                                             WHERE id = @id;";
 

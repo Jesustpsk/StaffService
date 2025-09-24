@@ -33,7 +33,6 @@ public class InitialMigration_20250922155259 : Migration
             .WithColumn("surname").AsString(50)
             .WithColumn("phone").AsString(20)
             .WithColumn("company_id").AsInt32()
-                .NotNullable()
             .WithColumn("passport_id").AsInt32()
                 .ForeignKey("fk_passport","passports", "id")
                     .OnDeleteOrUpdate(Rule.Cascade)

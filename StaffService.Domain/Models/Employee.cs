@@ -13,7 +13,7 @@ public class Employee
     [Column("phone")]
     public string Phone { get; set; }
     [Column("company_id")]
-    public int CompanyId { get; set; }
+    public int? CompanyId { get; set; }
     [Column("passport_id")]
     public int PassportId { get; set; }
     public Passport Passport { get; set; }
