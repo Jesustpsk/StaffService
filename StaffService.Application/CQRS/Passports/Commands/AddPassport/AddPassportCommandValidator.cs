@@ -9,12 +9,10 @@ public class AddPassportCommandValidator : AbstractValidator<AddPassportCommand>
         RuleFor(p => p.Type)
             .NotEmpty()
             .NotNull()
-            .MaximumLength(50)
-            .WithMessage("Passport type is required.");
+            .MaximumLength(50);
         RuleFor(p => p.Number)
             .NotEmpty()
             .NotNull()
-            .MaximumLength(20)
-            .WithMessage("Passport number is required.");
+            .MaximumLength(20);
     }
 }

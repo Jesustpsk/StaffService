@@ -8,7 +8,6 @@ public class GetEmployeeQueryValidator : AbstractValidator<GetEmployeeQuery>
     {
         RuleFor(e => e.Id)
             .NotEmpty()
-            .NotNull()
-            .WithMessage("Id is required.");
+            .NotNull();
     }
 }

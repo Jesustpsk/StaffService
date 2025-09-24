@@ -8,7 +8,6 @@ public class DeleteEmployeeCommandValidator : AbstractValidator<DeleteEmployeeCo
     {
         RuleFor(e => e.Id)
             .NotEmpty()
-            .NotNull()
-            .WithMessage("Id cannot be empty");
+            .NotNull();
     }
 }

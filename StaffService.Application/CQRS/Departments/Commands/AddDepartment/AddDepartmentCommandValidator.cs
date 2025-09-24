@@ -9,12 +9,10 @@ public class AddDepartmentCommandValidator : AbstractValidator<AddDepartmentComm
         RuleFor(d => d.Name)
             .NotEmpty()
             .NotNull()
-            .MaximumLength(100)
-            .WithMessage("Name is required");
+            .MaximumLength(100);
         RuleFor(d => d.Phone)
             .NotEmpty()
             .NotNull()
-            .MaximumLength(20)
-            .WithMessage("Phone is required");
+            .MaximumLength(20);
     }
 }
