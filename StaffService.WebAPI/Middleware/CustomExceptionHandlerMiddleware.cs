@@ -60,13 +60,6 @@ public class CustomExceptionHandlerMiddleware
                 _logger.LogError(exception, "Argument out of range");
                 break;
             
-            case Npgsql.PostgresException:
-                context.Response.StatusCode = StatusCodes.Status400BadRequest;
-                problemDetails.Title = "PostgreSQL exception";
-                problemDetails.Extensions["errors"] = exception.Message;
-                _logger.LogError(exception, "PostgreSQL exception");
-                break;
-            
             default:
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                 problemDetails.Title = "Internal server error";

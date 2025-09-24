@@ -4,7 +4,7 @@ services:
     build: .
     container_name: StaffApi
     ports:
-      - "5000:5000"   # localhost:5000 -> контейнер:8080
+      - "5000:5000"
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ConnectionStrings__StaffServiceDbContext: "Host=db;Port=5432;Database=StaffServiceDb;Username=postgres;Password=1234"

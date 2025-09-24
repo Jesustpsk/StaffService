@@ -1,9 +1,11 @@
 using System.Reflection;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using StaffService.Application;
 using Microsoft.OpenApi.Models;
 using StaffService.Persistence;
 using StaffService.WebAPI;
 using StaffService.WebAPI.Middleware;
+using StaffService.WebAPI.Routing.Transformers;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -11,7 +13,8 @@ var configuration = builder.Configuration;
 
 Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
 
-services.AddControllers();
+services.AddControllers(options =>
+    options.Conventions.Add(new RouteTokenTransformerConvention(new KebabCaseParameterTransformer())));
 services.AddWebApi(configuration);
 services.AddApplication();
 services.AddPersistence(configuration);

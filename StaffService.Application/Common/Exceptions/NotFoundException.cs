@@ -7,6 +7,9 @@ public class NotFoundException : Exception
         
     }
 
+    /// <summary>
+    /// Конструктор для мока
+    /// </summary>
     public NotFoundException()
     {
         
